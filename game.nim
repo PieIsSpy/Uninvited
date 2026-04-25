@@ -12,6 +12,8 @@ proc main*() =
     while is_over == false:
         echo "Floor ", floor
         echo "Room ", room
+        echo ""
+        
         var has_won = initiate_battle(cur_player)
         if has_won == false:
             is_over = true
