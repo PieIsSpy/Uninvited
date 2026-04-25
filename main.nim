@@ -8,19 +8,19 @@ proc showRules() =
     echo ""
 
 echo("Welcome, Uninvited Guest.")
-var name: string = ""
-while name == "" or name != "3":
+var action: string = ""
+while action == "" or action != "3":
     echo("[1] Enter the Hotel")
     echo("[2] House Rules")
     echo("[3] Flee")
-    name = readLine(stdin)
+    action = readLine(stdin)
 
-    if name == "1":
+    if action == "1":
         echo ""
         main()
-    elif name == "2":
+    elif action == "2":
         echo ""
         showRules()
-    elif name == "3":
+    elif action == "3":
         echo ""
         echo("Do not come back.")
