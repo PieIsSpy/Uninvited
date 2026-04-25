@@ -17,8 +17,6 @@ while name == "" or name != "3":
 
     if name == "1":
         echo ""
-        echo("Enjoy your stay.")
-        echo ""
         main()
     elif name == "2":
         echo ""
