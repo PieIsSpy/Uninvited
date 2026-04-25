@@ -13,3 +13,9 @@ proc create_entity*(name: string, health: int, damage: int, speed: int): Entity 
     new_entity.damage = damage
     new_entity.speed = speed
     return new_entity
+
+proc take_damage*(damaged: var Entity, amount: int) = 
+    echo ""
+    echo damaged.name, " took ", amount, " damage!"
+    echo ""
+    damaged.health -= amount
