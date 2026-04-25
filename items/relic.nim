@@ -1,5 +1,5 @@
 import item
 
-type Equippable* = object of Item
+type relic* = object of Item
     damage*: int
     defence*: int
