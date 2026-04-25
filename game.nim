@@ -14,4 +14,4 @@ proc main*() =
         if has_won == false:
             is_over = true
 
-    echo "You have perished."
+    echo "\x1B[31;1;4mYou have perished.\x1B[0m"
