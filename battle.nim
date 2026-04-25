@@ -1,8 +1,8 @@
 import entities/entity
 import entities/player
 
-proc initiate_battle*(cur_player: var Player): bool =
-    var enemy = create_entity("Shadow", 30, 9, 0)
+proc initiate_battle*(cur_player: var Player, floor: int): bool =
+    var enemy = random_enemy(floor)
     var valid_move = true
 
     echo cur_player.name, " encountered ", enemy.name

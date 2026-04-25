@@ -14,7 +14,7 @@ proc main*() =
         echo "Room ", room
         echo ""
 
-        var has_won = initiate_battle(cur_player)
+        var has_won = initiate_battle(cur_player, floor)
         if has_won == false:
             is_over = true
         else:
