@@ -15,6 +15,7 @@ proc initiate_battle*(cur_player: var Player, floor: int): bool =
         echo "[1] Fight"
         echo "[2] Defend"
         echo "[3] Dodge"
+        echo "[4] Item"
         action = readLine(stdin)
 
         if action == "1":
@@ -28,6 +29,9 @@ proc initiate_battle*(cur_player: var Player, floor: int): bool =
         elif action == "3":
             echo ""
             echo "Coward."
+            valid_move = true
+        elif action == "3":
+            echo "You cant"
             valid_move = true
         else:
             valid_move = false
