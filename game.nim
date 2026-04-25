@@ -4,8 +4,8 @@ import battle
 proc main*() =
     var cur_player = create_player()
     var is_over = false
-    var floor = 0
-    var room = 0
+    var floor = 1
+    var room = 1
 
     echo("Enjoy your stay.")
     echo ""
@@ -13,7 +13,7 @@ proc main*() =
         echo "Floor ", floor
         echo "Room ", room
         echo ""
-        
+
         var has_won = initiate_battle(cur_player)
         if has_won == false:
             is_over = true
@@ -21,6 +21,6 @@ proc main*() =
             room += 1
             if room > 10:
                 floor += 1
-                room = 0
+                room = 1
 
     echo "\x1B[31;1;4mYou have perished.\x1B[0m"
