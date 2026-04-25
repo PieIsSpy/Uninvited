@@ -1,5 +1,5 @@
-import entities/entity
-import entities/player
+import ../entities/entity
+import ../entities/player
 
 proc initiate_battle*(cur_player: var Player, floor: int): bool =
     var enemy = random_enemy(floor)

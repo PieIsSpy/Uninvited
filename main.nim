@@ -1,4 +1,4 @@
-import game
+import components/game
 
 proc showRules() =
     echo("Run through the corridors as far as you can.")

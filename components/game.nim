@@ -1,4 +1,4 @@
-import entities/player
+import ../entities/player
 import battle
 
 proc main*() =
