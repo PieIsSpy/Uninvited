@@ -1,8 +1,12 @@
+import std/random
 import ../entities/player
 import shop
 import battle
 
+randomize()
+
 proc main*() =
+    randomize()
     var cur_player = create_player()
     var is_over = false
     var floor = 1
@@ -15,14 +19,14 @@ proc main*() =
         echo "Room ", room
         echo ""
 
-        if room != 5:
+        if room == 5 or (rand(100) / 100) <= (1/7):
+            initiate_shop(cur_player)
+        else:
             var has_won = initiate_battle(cur_player, floor)
             if has_won == false:
                 is_over = true
             else:
-                cur_player.health = min(cur_player.health + int(float(cur_player.max_health) * 0.2), cur_player.max_health)
-        else:
-            initiate_shop(cur_player)
+                cur_player.health = min(cur_player.health + int(float(cur_player.max_health) * 0.3), cur_player.max_health)
         
         if is_over == false:
             room += 1

@@ -3,6 +3,8 @@ import strutils
 import ../entities/player
 import ../items/item
 
+randomize()
+
 var greetings_list = [
     "What're ya buyin'?",
     "Got somethin' that might interest ya'!",

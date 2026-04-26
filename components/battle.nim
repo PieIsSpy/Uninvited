@@ -4,6 +4,8 @@ import ../entities/entity
 import ../entities/player
 import ../items/item
 
+randomize()
+
 proc choose_item(player: var Player): string =
     var choice: int
     var item_name: string
@@ -83,7 +85,7 @@ proc initiate_battle*(cur_player: var Player, floor: int): bool =
                 
                 case item:
                     of "Bandaid", "Candy Pops":
-                        heal = min(cur_player.health + int(float(cur_player.max_health) * 0.1), cur_player.max_health)
+                        heal = min(cur_player.health + int(float(cur_player.max_health) * 0.2), cur_player.max_health)
                         echo "Healed ", heal, " HP"
                         cur_player.health = heal
                     of "Rock":
