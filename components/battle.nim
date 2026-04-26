@@ -30,7 +30,6 @@ proc ambush(player: var Player, enemy: var Entity) =
     if x <= 1 / (3 + player.perception):
         echo "\x1B[31;1;4mAMBUSHED!\x1B[0m"
         take_damage(player, enemy.damage + int(float(enemy.damage) * 0.05))
-        echo ""
 
 proc initiate_battle*(cur_player: var Player, floor: int): bool =
     var enemy = random_enemy(floor)
@@ -38,6 +37,7 @@ proc initiate_battle*(cur_player: var Player, floor: int): bool =
     var item: string
     var heal: int
     var stink_count = 0
+    var chance: float
 
     ambush(cur_player, enemy)
     echo cur_player.name, " encountered ", enemy.name
@@ -54,8 +54,15 @@ proc initiate_battle*(cur_player: var Player, floor: int): bool =
         action = readLine(stdin)
 
         if action == "1":
-            echo cur_player.name, " attacked!"
-            take_damage(enemy, cur_player.damage)
+            chance = rand(100) / 100
+
+            if chance <= 1 / (4 + cur_player.perception):
+                echo cur_player.name, " attacked, but missed."
+                echo ""
+            else:
+                echo cur_player.name, " attacked!"
+                take_damage(enemy, cur_player.damage)
+
             valid_move = true
         elif action == "2":
             echo ""
@@ -101,8 +108,14 @@ proc initiate_battle*(cur_player: var Player, floor: int): bool =
             valid_move = false
 
         if enemy.health > 0 and valid_move == true:
-            echo enemy.name, " attacked!"
-            take_damage(cur_player, int(enemy.damage / (if action == "2": 2 else: 1)))
+            chance = rand(100) / 100
+
+            if chance <= 1 / (3 - cur_player.perception):
+                echo enemy.name, " attacked, but missed."
+                echo ""
+            else:
+                echo enemy.name, " attacked!"
+                take_damage(cur_player, int(enemy.damage / (if action == "2": 2 else: 1)))
 
         if stink_count > 0:
             echo "The stink lingers..."
