@@ -25,6 +25,8 @@ var item_list: ItemTupleArray = [
     ("Handgun", "Ok, this is getting ridiculous. Who smuggled this in?", Rare)
 ]
 
+var delete_item* = ("", "", Common)
+
 proc create_item*(name: string, description: string, rarity: Rarity): Item =
     var new_item: Item
     new_item.name = name
