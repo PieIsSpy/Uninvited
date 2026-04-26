@@ -1,4 +1,5 @@
 import ../entities/player
+import shop
 import battle
 
 proc main*() =
@@ -14,10 +15,14 @@ proc main*() =
         echo "Room ", room
         echo ""
 
-        var has_won = initiate_battle(cur_player, floor)
-        if has_won == false:
-            is_over = true
+        if room != 5:
+            var has_won = initiate_battle(cur_player, floor)
+            if has_won == false:
+                is_over = true
         else:
+            initiate_shop(cur_player)
+        
+        if is_over == false:
             room += 1
             if room > 10:
                 floor += 1
