@@ -8,23 +8,28 @@ proc choose_item(player: var Player): string =
     var item_name: string
     echo ""
 
-    echo "Choose an item:"
-    player.show_items()
-    echo "[4] Cancel"
-    choice = parseInt(readLine(stdin)) - 1
+    try:
+        echo "Choose an item:"
+        player.show_items()
+        echo "[4] Cancel"
+        choice = parseInt(readLine(stdin)) - 1
 
-    if choice >= 0 and choice <= 2:
-        if player.items[choice].name != "":
-            item_name = player.items[choice].name
-            player.items[choice] = create_item(delete_item[0], delete_item[1], delete_item[2])
-            return item_name
+        if choice >= 0 and choice <= 2:
+            if player.items[choice].name != "":
+                item_name = player.items[choice].name
+                player.items[choice] = create_item(delete_item[0], delete_item[1], delete_item[2])
+                return item_name
 
-    return ""
+        return ""
+    except:
+        return ""
 
 proc initiate_battle*(cur_player: var Player, floor: int): bool =
     var enemy = random_enemy(floor)
     var valid_move = true
     var item: string
+    var heal: int
+    var stink_count = 0
 
     echo cur_player.name, " encountered ", enemy.name
     echo ""
@@ -59,6 +64,28 @@ proc initiate_battle*(cur_player: var Player, floor: int): bool =
                 valid_move = false
             else:
                 echo cur_player.name, " used ", item
+                
+                case item:
+                    of "Bandaid", "Candy Pops":
+                        heal = min(cur_player.health + int(float(cur_player.max_health) * 0.1), cur_player.max_health)
+                        echo "Healed ", heal, " HP"
+                        cur_player.health = heal
+                    of "Rock":
+                        take_damage(enemy, 20)
+                    of "Stink Bomb":
+                        echo "The area is filled with stink!"
+                        stink_count = 5
+                    of "Elephant Figure":
+                        echo "Address me."
+                        take_damage(enemy, 30)
+                    of "Bad Jam":
+                        echo "Mmmm jam."
+                        echo "Healed full health"
+                        cur_player.health = cur_player.max_health
+                    of "Handgun":
+                        echo "BANG!"
+                        take_damage(enemy, 100)
+
                 echo ""
                 valid_move = true
         else:
@@ -67,6 +94,12 @@ proc initiate_battle*(cur_player: var Player, floor: int): bool =
         if enemy.health > 0 and valid_move == true:
             echo enemy.name, " attacked!"
             take_damage(cur_player, int(enemy.damage / (if action == "2": 2 else: 1)))
+
+        if stink_count > 0:
+            echo "The stink lingers..."
+            take_damage(cur_player, 5)
+            take_damage(enemy, 5)
+            stink_count -= 1
 
     if cur_player.health <= 0:
         echo enemy.name, " won"
