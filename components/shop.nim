@@ -34,11 +34,7 @@ proc initiate_shop*(player: var Player) =
             if action_int >= 0 and action_int <= 2:
                 echo ""
                 echo "Choose a slot to replace:"
-                for i in countup(0, 2):
-                    if player.items[i].name != "":
-                        echo "[", i+1, "]", player.items[i].name
-                    else:
-                        echo "[", i+1, "] None"
+                player.show_items()
 
                 slot = parseInt(readLine(stdin)) - 1
 
