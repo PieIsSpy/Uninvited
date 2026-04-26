@@ -20,7 +20,7 @@ proc main*() =
             if has_won == false:
                 is_over = true
             else:
-                cur_player.health = min(cur_player.health + int(float(cur_player.max_health) * 0.5), cur_player.max_health)
+                cur_player.health = min(cur_player.health + int(float(cur_player.max_health) * 0.05), cur_player.max_health)
         else:
             initiate_shop(cur_player)
         
