@@ -1,4 +1,5 @@
 import strutils
+import std/random
 import ../entities/entity
 import ../entities/player
 import ../items/item
@@ -24,6 +25,13 @@ proc choose_item(player: var Player): string =
     except:
         return ""
 
+proc ambush(player: var Player, enemy: var Entity) =
+    var x = rand(100) / 100
+    if x <= 1 / (3 + player.perception):
+        echo "\x1B[31;1;4mAMBUSHED!\x1B[0m"
+        take_damage(player, enemy.damage + int(float(enemy.damage) * 0.05))
+        echo ""
+
 proc initiate_battle*(cur_player: var Player, floor: int): bool =
     var enemy = random_enemy(floor)
     var valid_move = true
@@ -31,6 +39,7 @@ proc initiate_battle*(cur_player: var Player, floor: int): bool =
     var heal: int
     var stink_count = 0
 
+    ambush(cur_player, enemy)
     echo cur_player.name, " encountered ", enemy.name
     echo ""
     while cur_player.health > 0 and enemy.health > 0:
