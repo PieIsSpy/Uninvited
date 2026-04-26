@@ -1,11 +1,9 @@
 import entity
 import ../items/item
-import ../items/relic
 
 type Player* = object of Entity
     perception*: int
     items*: array[3, Item]
-    relic*: Relic
 
 proc create_player*(): Player =
     var new_player: Player
